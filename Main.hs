@@ -169,7 +169,7 @@ f8 Blue  = 'b'
 
 
 -- TODO: Define the function nextColor:
--- Next of red is green, next of green is blue, next of blue is green again.
+-- Next of red is green, next of green is blue, next of blue is red again.
 nextColor :: Color -> Color
 nextColor = error "TODO"
 
@@ -262,7 +262,7 @@ pairProductSpec :: Spec
 pairProductSpec = 
     describe "pairProduct" $ do 
           it "pairProduct (IP 4 5) = 20" $
-           pairProduct (IP 4 5) `shouldBe` 40
+           pairProduct (IP 4 5) `shouldBe` 20
 
 
 -- A function which swaps the values on `IPair` values:
