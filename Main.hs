@@ -169,7 +169,7 @@ f8 Blue  = 'b'
 
 
 -- TODO: Define the function nextColor:
--- Next of red is green, next of green is blue, next of blue is green again.
+-- Next of red is green, next of green is blue, next of blue is red again.
 nextColor :: Color -> Color
 nextColor = error "TODO"
 
