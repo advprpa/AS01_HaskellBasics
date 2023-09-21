@@ -525,7 +525,7 @@ ho1 = map fst
 -------------------------------------------------------------------------------
 
 -- The following defines a function named `la1` which increments its argument.
--- It consists of two thing: Functionality (increment the value) and the name `la1`.
+-- It consists of two things: Functionality (increment the value) and the name `la1`.
 la1 :: Int -> Int
 la1 i = i + 1
 
