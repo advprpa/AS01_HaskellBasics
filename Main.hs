@@ -594,7 +594,7 @@ o6 = 3 `mul` 4
 
 -- TODO: Define the function evenWhenSquared'':
 -- It takes a list of Ints, squares every Int, and keeps only those values which are even.
--- Use a `^` operator section to square thr values.
+-- Use a `^` operator section to square the values.
 evenWhenSquared'' :: [Int] -> [Int]
 evenWhenSquared'' = error "TODO"
 
