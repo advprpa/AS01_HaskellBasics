@@ -22,7 +22,7 @@ The different topics of this assignment are all covered by the first part of the
 - Run all tests: `cabal test --test-show-details=direct`
 - Only run tests for a particular section:\
    `cabal test --test-show-details=direct --test-option=--match --test-option="8."`
-- Start a REPL: `cabal repl` \
+- Start a REPL: `cabal repl test:tests` \
 This starts ghci (a read eval print loop) to experiment with your code.
 Save your file after making changes and reload it into the repl using `:reload` or `:r`.
 `:q` terminates the session.
