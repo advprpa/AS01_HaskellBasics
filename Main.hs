@@ -262,7 +262,7 @@ pairProductSpec :: Spec
 pairProductSpec = 
     describe "pairProduct" $ do 
           it "pairProduct (IP 4 5) = 20" $
-           pairProduct (IP 4 5) `shouldBe` 40
+           pairProduct (IP 4 5) `shouldBe` 20
 
 
 -- A function which swaps the values on `IPair` values:
