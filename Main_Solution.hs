@@ -90,8 +90,11 @@ c2 = Blue
 
 -- TODO: Write your own enumeration type for weekdays. 
 -- Make sure that the values can be printed and compared.
+data Weekday = Mon | Tue | Wed | Thu | Fri | Sat | Sun deriving (Show, Eq)
 
 -- TODO: Define a binding named `bestDay` with your value for Sunday. Give the binding a type signature.
+bestDay :: Weekday
+bestDay = Sun
 
 -------------------------------------------------------------------------------
 -- 4. Basic syntax
@@ -119,7 +122,7 @@ r2 = f2 1 2
 -- TODO: Define the function sumOfSquares:
 -- It should take two arguments and return the sum of their squares.
 sumOfSquares :: Int -> Int -> Int
-sumOfSquares = error "TODO"
+sumOfSquares a b = (a * a) + (b * b)
 
 -- This is a test which is executed by the test framework.
 sumOfSquaresSpec :: Spec
@@ -171,7 +174,9 @@ f8 Blue  = 'b'
 -- TODO: Define the function nextColor:
 -- Next of red is green, next of green is blue, next of blue is red again.
 nextColor :: Color -> Color
-nextColor = error "TODO"
+nextColor Red   = Green
+nextColor Green = Blue
+nextColor Blue  = Red
 
 -- This is a test which is executed by the test framework.
 nextColorSpec :: Spec
@@ -208,7 +213,7 @@ f10 c = f c
     f _          = 12
 
 -- TODO: Write the type of the given function `f11`:
---- f11 :: TODO
+f11 :: Color -> Int -> Bool
 f11 a c = f10 a > c 
 
 
@@ -238,7 +243,7 @@ price (Power True)  = 100
 price (Power False) = 50
 
 -- TODO: Write the type of the given definition `s2`.
--- s2 :: TODO
+s2 :: Part -> Bool -> Int
 s2 a b = price a + price (Power b)
 
 
@@ -256,7 +261,7 @@ ip = IP 5 4
 -- TODO: Define the function pairProduct:
 -- It returns the product of its components.
 pairProduct :: IPair -> Int
-pairProduct = error "TODO"
+pairProduct (IP a b) = a * b
 
 pairProductSpec :: Spec
 pairProductSpec = 
@@ -308,7 +313,7 @@ p6 :: Color
 p6 = snd (True,Red)
 
 -- TODO: What is the type of the given definition `p7`?
--- p7 :: TODO
+p7 :: Color
 p7 = snd (True, fst (Red, 'X'))
 
 
@@ -325,7 +330,7 @@ name = fstName (MkLecturer "Peter" "Meier")
 
 -- TODO: What is the type of the generated function `sndName`?
 -- You can check your answer with `:t sndName` in the repl.
-
+-- sndName :: Lecturer -> String
 
 -------------------------------------------------------------------------------
 -- 6. Lists
@@ -363,7 +368,9 @@ e2 = firstE Nil -- Crashes!
 -- TODO: Define the function isEmpty:
 -- It returns whether the given list is empty.
 isEmpty :: List a -> Bool
-isEmpty = error "TODO"
+isEmpty Nil = True
+isEmpty _   = False
+
 
 isEmptySpec :: Spec
 isEmptySpec = 
@@ -418,7 +425,7 @@ getFirstTwo _         = []
 -- It returns in a pair the first and third element of a list.
 -- Is a total (in contrast to partial) implementation possible?
 firstAndThird :: [a] -> (a,a)
-firstAndThird = error "TODO"
+firstAndThird (a:_:c:_)= (a,c) -- There is no total function with this type
 
 firstAndThirdSpec :: Spec
 firstAndThirdSpec = 
@@ -466,7 +473,7 @@ res :: Int
 res = add 1 2 -- actually means ((add 1) 2)
 
 -- TODO: What is the type of `pa1`?
--- pa1 :: TODO
+pa1 :: Int -> Bool
 pa1 = f True 1
   where f :: Bool -> Int -> Int -> Bool
         f _ _ _ = True
@@ -508,7 +515,10 @@ fr = filter even [1,2,3,4]
 -- It takes a list of Ints, squares every Int, and keeps only those values which are even.
 -- Define and use a local function `square :: Int -> Int`
 evenWhenSquared :: [Int] -> [Int]
-evenWhenSquared = error "TODO"
+evenWhenSquared is = filter even (map square is)
+  where square :: Int -> Int
+        square a = a*a
+
 
 evenWhenSquaredSpec :: Spec
 evenWhenSquaredSpec = 
@@ -517,7 +527,7 @@ evenWhenSquaredSpec =
            evenWhenSquared ([1,2,3,4] :: [Int]) `shouldBe` [4,16]
 
 -- TODO: What is the type of the given definition `ho1`?
--- ho1 :: TODO
+ho1 :: [(a,b)] -> [a]
 ho1 = map fst
 
 -------------------------------------------------------------------------------
@@ -545,7 +555,7 @@ la3 = map (\i -> i + 1) [1,2,3]
 -- It takes a list of Ints, squares every Int, and keeps only those values which are even.
 -- Use a lambda expression to square the values.
 evenWhenSquared' :: [Int] -> [Int]
-evenWhenSquared' = error "TODO"
+evenWhenSquared' is = filter even (map (\i -> i*i) is)
 
 evenWhenSquared'Spec :: Spec
 evenWhenSquared'Spec = 
@@ -596,7 +606,7 @@ o6 = 3 `mul` 4
 -- It takes a list of Ints, squares every Int, and keeps only those values which are even.
 -- Use a `^` operator section to square thr values.
 evenWhenSquared'' :: [Int] -> [Int]
-evenWhenSquared'' = error "TODO"
+evenWhenSquared'' is = filter even (map (^2) is)
 
 evenWhenSquared''Spec :: Spec
 evenWhenSquared''Spec = 
@@ -659,8 +669,9 @@ Step 5: Generalize and simplify.
 -- TODO: Define the function sumOfSquares:
 -- It takes a list and returns the sum of their squared elements.
 sumOfSquaresRec :: [Int] -> Int
-sumOfSquaresRec = error "TODO"
-
+sumOfSquaresRec []     = 0
+sumOfSquaresRec (i:is) = i*i + sumOfSquaresRec is
+ 
 sumOfSquaresRecSpec :: Spec
 sumOfSquaresRecSpec = 
     describe "sumOfSquaresRec" $ do 
@@ -672,7 +683,8 @@ sumOfSquaresRecSpec =
 
 -- TODO: Define the function `convertList` which takes a `List a` and converts it to a Haskell `[a]`:
 convertList :: List a -> [a] 
-convertList = error "TODO"
+convertList Nil           = []
+convertList (Node a rest) = a : convertList rest
 
 convertListSpec :: Spec
 convertListSpec = 
